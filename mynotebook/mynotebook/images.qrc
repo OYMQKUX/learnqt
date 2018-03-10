@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/myimages">
+        <file>resources/find.icns</file>
+        <file>resources/paste.icns</file>
+        <file>resources/copy.icns</file>
+        <file>resources/cut.icns</file>
+        <file>resources/exit.icns</file>
+        <file>resources/undo.icns</file>
+        <file>resources/save_as.icns</file>
+        <file>resources/save.icns</file>
+        <file>resources/close.icns</file>
+        <file>resources/open.icns</file>
+        <file>resources/new.icns</file>
+    </qresource>
+</RCC>
