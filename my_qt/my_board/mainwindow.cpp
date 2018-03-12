@@ -9,6 +9,7 @@
 #include <QCloseEvent>
 #include <QTimer>
 #include <QLabel>
+#include <QTextCursor>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -32,9 +33,17 @@ MainWindow::MainWindow(QWidget *parent) :
     word_count->setFrameShape(QFrame::WinPanel);
     word_count->setFrameShadow(QFrame::Sunken);
     ui->statusBar->addWidget(word_count);
-    QTimer *timer = new QTimer(this);
-    timer->start(0);
-    connect(timer, &QTimer::timeout, this, &MainWindow::update_word_count);
+    QTimer *timer1 = new QTimer(this);
+    timer1->start(0);
+    connect(timer1, &QTimer::timeout, this, &MainWindow::update_word_count);
+
+    pos = new QLabel;
+    pos->setFrameStyle(QFrame::Box | QFrame::Sunken);
+    pos->setTextFormat(Qt::RichText);
+    ui->statusBar->addPermanentWidget(pos);
+    QTimer *timer2 = new QTimer(this);
+    timer2->start(0);
+    connect(timer2, &QTimer::timeout, this, &MainWindow::update_pos);
 }
 
 MainWindow::~MainWindow()
@@ -52,7 +61,7 @@ void MainWindow::newFile()
         ui->textEdit->setVisible(true);
     }
 }
-//判断是否cancel，如果不是处理是否保存
+//判断是否不是cancel，如果不是处理是否保存
 bool MainWindow::ifnotcancel()
 {
     if(ui->textEdit->document()->isModified()){
@@ -145,6 +154,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::update_word_count()
 {
     word_count->setText(tr("Word count: ") + QString::number(ui->textEdit->toPlainText().length()));
+}
+
+void MainWindow::update_pos()
+{
+    pos->setText(tr("row: %1  column: %2").arg(ui->textEdit->textCursor().blockNumber()).arg(ui->textEdit->textCursor().columnNumber()));
 }
 
 void MainWindow::on_actionNew_N_triggered()

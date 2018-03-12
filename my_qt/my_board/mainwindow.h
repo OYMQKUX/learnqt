@@ -27,6 +27,7 @@ public:
     void find_front();
     void closeEvent(QCloseEvent *);
     void update_word_count();
+    void update_pos();
 
 private slots:
     void on_actionNew_N_triggered();
@@ -57,7 +58,7 @@ private:
     bool isUntitled;
     QDialog *findDlg;
     QLineEdit *findLindeEdit;
-    QLabel *word_count;
+    QLabel *word_count, *pos;
 };
 
 #endif // MAINWINDOW_H
